@@ -1,0 +1,29 @@
+﻿using Volo.Abp.Account;
+using Volo.Abp.Mapperly;
+using Volo.Abp.FeatureManagement;
+using Volo.Abp.Identity;
+using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.SettingManagement;
+using Volo.Abp.TenantManagement;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace ABPV1;
+
+[DependsOn(
+    typeof(ABPV1DomainModule),
+    typeof(AbpAccountApplicationModule),
+    typeof(ABPV1ApplicationContractsModule),
+    typeof(AbpIdentityApplicationModule),
+    typeof(AbpPermissionManagementApplicationModule),
+    typeof(AbpTenantManagementApplicationModule),
+    typeof(AbpFeatureManagementApplicationModule),
+    typeof(AbpSettingManagementApplicationModule)
+    )]
+public class ABPV1ApplicationModule : AbpModule
+{
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        context.Services.AddMapperlyObjectMapper<ABPV1ApplicationModule>();
+    }
+}
